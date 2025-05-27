@@ -9,7 +9,7 @@ import requests
 import json
 
 def check_historia(data):
-    r = requests.get(settings.PATH_VAR, headers={"Accept":"application/json"})
+    r = requests.get(settings.PATH_HIS, headers={"Accept":"application/json"})
     historias = r.json()
     for historia in historias:
         if data["historiaPaciente"] == historia["id"]:
@@ -42,7 +42,7 @@ def EventosCreate(request):
         data_json = json.loads(data)
         evento_list = []
         for evento in data_json:
-                    if check_variable(evento) == True:
+                    if check_historia(evento) == True:
                         dbevento = Evento()
                         dbevento.fecha = evento['fecha']
                         dbevento.historiaPaciente = evento['historiaPaciente']
