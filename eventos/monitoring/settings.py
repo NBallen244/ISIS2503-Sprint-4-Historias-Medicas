@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'variables',
+    'eventos',
 ]
 
 MIDDLEWARE = [
@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('VARIABLES_DB_NAME', 'variables_db'),
-        'USER': os.environ.get('VARIABLES_DB_USER', 'variables_user'),
-        'PASSWORD': os.environ.get('VARIABLES_DB_PASSWORD', 'isis2503'),
-        'HOST': os.environ.get('VARIABLES_DB_HOST', 'localhost'),
-        'PORT': '5432',
+        'NAME': os.environ.get("EVENTOS_DB", "eventos_db"),
+        'USER': os.environ.get("EVENTOS_DB_USER", "eventos_user"),
+        'PASSWORD': os.environ.get("EVENTOS_DB_PASSWD", "isis2503"),
+        'HOST': os.environ.get("EVENTOS_DB_HOST", "10.128.0.83"),
+        'PORT': os.environ.get("EVENTOS_DB_PORT", "5432")
     }
 }
 
@@ -132,3 +132,6 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+PATH_API_GATEWAY = "http://" + os.environ.get("KONG_HOST", "10.128.0.81") + ":" + os.environ.get("KONG_PORT", "8000")
+PATH_VAR = PATH_API_GATEWAY + "/variables"

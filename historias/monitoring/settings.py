@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'measurements',
+    'historias',
 ]
 
 MIDDLEWARE = [
@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get("MEASUREMENTS_DB", "measurements_db"),
-        'USER': os.environ.get("MEASUREMENTS_DB_USER", "measurements_user"),
-        'PASSWORD': os.environ.get("MEASUREMENTS_DB_PASSWD", "isis2503"),
-        'HOST': os.environ.get("MEASUREMENTS_DB_HOST", "10.128.0.83"),
-        'PORT': os.environ.get("MEASUREMENTS_DB_PORT", "5432")
+        'NAME': os.environ.get('HISTORIAS_DB_NAME', 'historias_db'),
+        'USER': os.environ.get('HISTORIAS_DB_USER', 'historias_user'),
+        'PASSWORD': os.environ.get('HISTORIAS_DB_PASSWORD', 'isis2503'),
+        'HOST': os.environ.get('HISTORIAS_DB_HOST', 'localhost'),
+        'PORT': '5432',
     }
 }
 
@@ -132,6 +132,3 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
-
-PATH_API_GATEWAY = "http://" + os.environ.get("KONG_HOST", "10.128.0.81") + ":" + os.environ.get("KONG_PORT", "8000")
-PATH_VAR = PATH_API_GATEWAY + "/variables"
