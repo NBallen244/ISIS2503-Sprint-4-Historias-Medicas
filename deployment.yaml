@@ -99,8 +99,8 @@ resources:
           #!/bin/bash
           sudo mkdir /home/labs
           cd /home/labs
-          sudo git clone https://github.com/ISIS2503/ISIS2503-Microservices-AppDjango.git
-          cd ISIS2503-Microservices-AppDjango
+          sudo git clone https://github.com/NBallen244/ISIS2503-Sprint-4-Historias-Medicas.git
+          cd ISIS2503-Sprint-4-Historias-Medicas
           docker network create kong-net
           docker run -d --name kong --network=kong-net --restart=always \
           -v "$(pwd):/kong/declarative/" -e "KONG_DATABASE=off" \

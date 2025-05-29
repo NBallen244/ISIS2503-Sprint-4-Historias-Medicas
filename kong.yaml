@@ -9,6 +9,14 @@ services:
         paths:
           - /historias
         strip_path: false
+      - name: historiascreate
+        paths:
+          - /historiacreate
+        strip_path: false
+      - name: createhistorias
+        paths:
+          - /createhistorias
+        strip_path: false
 
   - name: eventos_service
     host: eventos_upstream
@@ -17,6 +25,14 @@ services:
       - name: eventos
         paths:
           - /eventos
+        strip_path: false
+      - name: eventocreate
+        paths:
+          - /eventocreate
+        strip_path: false
+      - name: createeventos
+        paths:
+          - /createeventos
         strip_path: false
   
   - name: login_service
