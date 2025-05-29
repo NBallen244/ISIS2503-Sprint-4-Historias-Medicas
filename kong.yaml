@@ -1,31 +1,60 @@
 _format_version: "2.1"
 
 services:
-  - name: variables_service
-    host: variables_upstream
+  - name: historias_service
+    host: historias_upstream
     protocol: http
     routes:
-      - name: variables
+      - name: historias
         paths:
-          - /variables
+          - /historias
         strip_path: false
 
-  - name: measurements_service
-    host: measurements_upstream
+  - name: eventos_service
+    host: eventos_upstream
     protocol: http
     routes:
-      - name: measurements
+      - name: eventos
         paths:
-          - /measurements
+          - /eventos
+        strip_path: false
+  
+  - name: login_service
+    host: login_upstream
+    protocol: http
+    routes:
+      - name: logins
+        paths:
+          - /logins
+        strip_path: false
+
+      - name: logIn
+        paths:
+          - /logins/logIn
+        strip_path: false
+
+      - name: logOut
+        paths:
+          - /logins/logout
+        strip_path: false
+
+      - name: clogin
+        paths:
+          - /logins/clogin
         strip_path: false
     
 upstreams:
-  - name: variables_upstream
+  - name: historias_upstream
     targets:
       - target: 10.128.0.84:8080
         weight: 100
 
-  - name: measurements_upstream
+  - name: eventos_upstream
     targets:
       - target: 10.128.0.85:8080
+        weight: 100
+  
+  - name: logins_upstream
+    targets:
+      - target: 10.128.0.87:8080
         weight: 100

@@ -1,14 +1,4 @@
-# ***************** Universidad de los Andes ***********************
-# ****** Departamento de Ingeniería de Sistemas y Computación ******
-# ********** Arquitectura y diseño de Software - ISIS2503 **********
-#
-# Infraestructura para laboratorio de microservicios con Django (microservicio Places)
-# Elementos a desplegar:
-# 1. Firewalls:
-#    - msd-service-mongodb
-# 1. Instancias MVs:
-#    - msd-places-db (mongodb instalado y configurado)
-#    - msd-places-ms (Servicio de places instalado y configurado)
+
 
 resources:
 # Firewall rules
@@ -28,7 +18,7 @@ resources:
       - 27017
 
 # Database instance
-- name: msd-places-db
+- name: msd-logins-db
   type: compute.v1.instance
   properties:
     zone: us-central1-a
@@ -57,7 +47,7 @@ resources:
                             mongodb/mongodb-community-server
 
 # Service instance
-- name: msd-places-ms
+- name: msd-logins-ms
   type: compute.v1.instance
   properties:
     zone: us-central1-a
@@ -91,6 +81,6 @@ resources:
           sudo curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
           sudo mkdir /home/labs
           cd /home/labs
-          sudo git clone https://github.com/ISIS2503/ISIS2503-Microservices-AppDjango.git
-          cd ISIS2503-Microservices-AppDjango/places
+          sudo git clone https://github.com/NBallen244/ISIS2503-Sprint-4-Historias-Medicas.git
+          cd ISIS2503-Sprint-4-Historias-Medicas/logins
           sudo python3.12 -m pip install -r requirements.txt

@@ -4,12 +4,27 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.urls import reverse
 from django.http import JsonResponse
+from django.conf import settings
 import json
+import requests
 
+
+def check_rol():
+    r = requests.get(settings.PATH_LOG, headers={"Accept":"application/json"})
+    if r.status_code == 404:
+        return False
+    else:
+        usuario = r.json()
+        if usuario["rol"] in ["medico", "medica", "enfermera", "enfermero"]:
+            return True
+        else:
+            return False
 def HistoriaList(request):
-    queryset = Historia.objects.all()
-    context = list(queryset.values('id', 'paciente', 'cc'))
-    return JsonResponse(context, safe=False)
+    if check_rol():
+        queryset = Historia.objects.all()
+        context = list(queryset.values('id', 'paciente', 'cc'))
+        return JsonResponse(context, safe=False)
+    return HttpResponse("Usuario actual no autorizado y/o no ingresado", status=403)
 
 def HistoriaCreate(request):
     if request.method == 'POST':

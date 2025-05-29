@@ -16,10 +16,23 @@ def check_historia(data):
             return True
     return False
 
+def check_rol():
+    r = requests.get(settings.PATH_LOG, headers={"Accept":"application/json"})
+    if r.status_code == 404:
+        return False
+    else:
+        usuario = r.json()
+        if usuario["rol"] in ["medico", "medica", "enfermera", "enfermero"]:
+            return True
+        else:
+            return False
+
 def EventoList(request):
-    queryset = Evento.objects.all()
-    context = list(queryset.values('id', 'fecha', 'historiaPaciente', 'especialidad', 'comentarios'))
-    return JsonResponse(context, safe=False)
+    if check_rol():
+        queryset = Evento.objects.all()
+        context = list(queryset.values('id', 'fecha', 'historiaPaciente', 'especialidad', 'comentarios'))
+        return JsonResponse(context, safe=False)
+    return HttpResponse("Usuario actual no autorizado y/o no ingresado", status=403)
 
 def EventoCreate(request):
     if request.method == 'POST':
