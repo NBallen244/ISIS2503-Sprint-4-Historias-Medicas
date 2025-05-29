@@ -131,7 +131,7 @@ resources:
       - key: startup-script
         value: |
           #!/bin/bash
-          docker run --restart=always -d -e POSTGRES_USER=variables_user -e POSTGRES_DB=variables_db -e POSTGRES_PASSWORD=isis2503 -p 5432:5432 --name variables-db postgres
+          docker run --restart=always -d -e POSTGRES_USER=historias_user -e POSTGRES_DB=historias_db -e POSTGRES_PASSWORD=isis2503 -p 5432:5432 --name historias-db postgres
 
 - name: msd-eventos-db
   type: compute.v1.instance
@@ -156,7 +156,7 @@ resources:
       - key: startup-script
         value: |
           #!/bin/bash
-          docker run --restart=always -d -e POSTGRES_USER=measurements_user -e POSTGRES_DB=measurements_db -e POSTGRES_PASSWORD=isis2503 -p 5432:5432 --name measurements-db postgres
+          docker run --restart=always -d -e POSTGRES_USER=eventos_user -e POSTGRES_DB=eventos_db -e POSTGRES_PASSWORD=isis2503 -p 5432:5432 --name eventos-db postgres
 
 
 # Service instances
