@@ -13,7 +13,7 @@ def create_app():
 
     @app.on_event("startup")
     async def on_startup():
-        await db.set_places_db()
+        await db.set_logins_db()
 
     app.include_router(views.router)
 
