@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status, Body
-import logins.logic.logins_logic as logins_service
+import logic.logins_logic as logins_service
 from models.models import Login, LoginOut, LoginCollection
 
 router = APIRouter()

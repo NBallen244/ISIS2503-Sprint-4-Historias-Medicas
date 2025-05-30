@@ -70,7 +70,7 @@ upstreams:
       - target: 10.128.0.85:8080
         weight: 100
   
-  - name: logins_upstream
+  - name: login_upstream
     targets:
       - target: 10.128.0.87:8080
         weight: 100
