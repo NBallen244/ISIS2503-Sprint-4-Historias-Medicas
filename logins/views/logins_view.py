@@ -17,15 +17,6 @@ async def get_logins():
 
 
 @router.get(
-    "/{login_code}",
-    response_description="Get a single login by its code",
-    response_model=LoginOut,
-    status_code=status.HTTP_200_OK,
-)
-async def get_login(login_code: str):
-    return await logins_service.get_login(login_code)
-
-@router.get(
     "/logIn",
     response_description="Log In",
     response_model=LoginOut,
@@ -40,16 +31,15 @@ async def login(login: Login = Body(...)):
     response_model=LoginOut,
     status_code=status.HTTP_200_OK,
 )
-async def get_loginActual(login_code: str):
+async def get_loginActual():
     return await logins_service.getLoginActual()
 
 @router.get(
     "/logout",
     response_description="Logs out current user",
-    response_model=LoginOut,
     status_code=status.HTTP_200_OK,
 )
-async def get_login(login_code: str):
+async def deslogear():
     return await logins_service.logOut()
 
 @router.post(

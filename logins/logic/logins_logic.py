@@ -11,10 +11,11 @@ Main functions:
 from models.models import Login, LoginCollection
 from models.db import logins_collection
 from pymongo.errors import DuplicateKeyError
-from fastapi import HTTPException
+from fastapi import HTTPException, FastAPI
 
-loginActual= None  # Placeholder for the current login context, if needed
-codigoLoginActual = None  # Placeholder for the current login code context, if needed
+app = FastAPI()
+app.loginActual= None  # Placeholder for the current login context, if needed
+app.codigoLoginActual = None  # Placeholder for the current login code context, if needed
 
 async def get_logins():
     """
@@ -33,8 +34,8 @@ async def logIn(login: Login):
     contraseña = login.contraseña
     
     if (loginA := await logins_collection.find_one({"correo": correo, "contraseña": contraseña})) is not None:
-        loginActual = loginA
-        codigoLoginActual = loginA.get("correo", None)
+        app.loginActual = loginA
+        app.codigoLoginActual = loginA.get("correo", None)
         return loginA
 
     raise HTTPException(
@@ -45,10 +46,10 @@ async def getLoginActual():
     Get the current login information.
     :return: The current login information
     """
-    if loginActual is not None:
-        return loginActual
-    elif codigoLoginActual is not None:
-        if (login := await logins_collection.find_one({"correo": codigoLoginActual})) is not None:
+    if app.loginActual is not None:
+        return app.loginActual
+    elif app.codigoLoginActual is not None:
+        if (login := await logins_collection.find_one({"correo": app.codigoLoginActual})) is not None:
             return login
 
     raise HTTPException(
@@ -62,7 +63,7 @@ async def logOut():
     """
     loginActual= None
     codigoLoginActual = None
-    return None
+    return 
 
 async def get_login(login_code: str):
     """
