@@ -39,7 +39,6 @@ def EventoCreate(request):
         data_json = json.loads(data)
         if check_historia(data_json):
             evento = Evento()
-            evento.fecha = data_json['fecha']
             evento.historiaPaciente = data_json['historiaPaciente']
             evento.especialidad = data_json['especialidad']
             evento.comentarios = data_json['comentarios']
