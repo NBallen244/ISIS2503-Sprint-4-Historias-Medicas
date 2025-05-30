@@ -20,13 +20,12 @@ def check_rol():
     r = requests.get(settings.PATH_LOG, headers={"Accept":"application/json"})
     if r.status_code == 404:
         return False
-    else:
+    elif len(r.json()) != 0:
         usuario = r.json()
         if usuario["rol"] in ["medico", "medica", "enfermera", "enfermero"]:
             return True
         else:
             return False
-
 def EventoList(request):
     if check_rol():
         queryset = Evento.objects.all()
