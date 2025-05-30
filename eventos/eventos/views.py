@@ -55,7 +55,6 @@ def EventosCreate(request):
         for evento in data_json:
                     if check_historia(evento) == True:
                         dbevento = Evento()
-                        dbevento.fecha = evento['fecha']
                         dbevento.historiaPaciente = evento['historiaPaciente']
                         dbevento.especialidad = evento['especialidad']
                         dbevento.comentarios = evento['comentarios']
