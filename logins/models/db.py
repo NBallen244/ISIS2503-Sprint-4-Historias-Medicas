@@ -11,7 +11,7 @@ logins_collection = db.get_collection("logins")
 
 async def set_logins_db():
     # Creates a unique index on the code field
-    await logins_collection.create_index("code", unique=True)
+    await logins_collection.create_index("correo", unique=True)
 
 
 # Represents an ObjectId field in the database.
